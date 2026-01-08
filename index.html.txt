@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>노연섭 포트폴리오</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gray-100 text-gray-900">
+  <div class="max-w-5xl mx-auto p-4">
+
+    <header class="flex items-center justify-between gap-4 py-4">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden">
+          <img src="https://blogpfthumb-phinf.pstatic.net/MjAyNjAxMDZfOCAg/MDAxNzY3Njk3NzQxMDYy.cspCsbwdgzHVLHiUtRwSSHrsBr7z_PchAyblG2QQtjIg.MjR5RUJ3Q8lp8IFFQ34pwIzBdDZFSD_JVurrkgwC1d4g.JPEG/KakaoTalk_20260106_195906120_01.jpg/KakaoTalk_20260106_195906120_01.jpg?type=w161" 
+               alt="프로필" class="w-full h-full object-cover" />
+        </div>
+        <div>
+          <p class="font-bold text-lg">노연섭</p>
+          <p class="text-sm text-gray-600">한림대학교 / 4학년</p>
+        </div>
+      </div>
+
+      <nav class="flex items-center gap-6">
+        <a class="text-sm font-bold text-blue-600" href="index.html">Home</a>
+        <a class="text-sm text-gray-700 hover:text-blue-500" href="about.html">About</a>
+        <a class="text-sm text-gray-700 hover:text-blue-500" href="calculator.html">Calculator</a>
+      </nav>
+    </header>
+
+    <section class="flex flex-col md:flex-row items-center justify-between p-8 mt-6 border border-gray-200 rounded-2xl bg-white shadow-sm gap-8">
+      <div class="w-full md:w-2/3">
+        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">
+          안녕하세요, <span class="text-[#3b3b4b]">프론트엔드</span>를 공부중인 노연섭입니다.
+        </h1>
+        <p class="mt-4 text-gray-600 leading-relaxed">
+          한림대학교 환경생명공학과에 재학 중이며, 현재 학부생으로 활동하고 있습니다.<br>
+          <strong>2026년도 부학생회장</strong>으로서 소통과 협업의 가치를 배우고 있습니다.
+        </p>
+
+        <div class="mt-8 flex gap-3">
+          <a href="about.html" class="px-6 py-2.5 rounded-xl text-sm font-semibold bg-[#3b3b4b] text-white hover:bg-opacity-90 transition-all">
+            상세 프로필 보기
+          </a>
+          <a href="calculator.html" class="px-6 py-2.5 rounded-xl text-sm font-semibold border border-gray-300 hover:bg-gray-50 transition-all">
+            계산기 실행
+          </a>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center gap-3">
+        <div class="h-32 w-32 rounded-full border-4 border-gray-100 shadow-lg overflow-hidden bg-gray-200">
+          <img src="https://blogpfthumb-phinf.pstatic.net/MjAyNjAxMDZfMjA0/MDAxNzY3Njk3NTgzNzk3.cNmvSSY5cvwv348zngUPhG0A3Oa5J1hhcm2FgnqhoTgg.KlGPdn5BxUWiF8OpZIhf4_6QFQfzSH17ye07r6TYc84g.JPEG/KakaoTalk_20251103_125101243.jpg/KakaoTalk_20251103_125101243.jpg?type=w161" 
+               alt="프로필 이미지" class="w-full h-full object-cover" />
+        </div>
+      </div>
+    </section>
+
+    <footer class="mt-12 mb-8 text-center border-t border-gray-200 pt-8">
+      <p class="text-xs text-gray-400 font-medium tracking-widest uppercase">© 2026 Hallym University - Roh Yeon-seop</p>
+    </footer>
+  </div>
+</body>
+</html>

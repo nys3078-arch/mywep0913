@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산기 - 유승현</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 추가적인 그리드 간격 보정 */
+        .keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="max-w-5xl mx-auto p-4">
+        <a href="index.html" class="text-sm font-bold text-blue-600 hover:underline">← 홈으로 돌아가기</a>
+    </div>
+
+    <div class="flex items-center justify-center p-3 sm:p-6">
+        <div class="w-full max-w-[420px] bg-white rounded-xl shadow-lg border border-gray-200">
+            <div class="p-4 sm:p-5">
+                <h5 class="text-center mb-3 text-base sm:text-lg font-bold text-[#3b3b4b]">
+                    JS Calculator (Advanced)
+                </h5>
+                <input id="display" type="text" class="w-full text-right text-xl sm:text-2xl px-3 sm:px-4 py-2 sm:py-3 mb-3 rounded-lg border border-gray-300 bg-gray-50 focus:outline-none font-mono" value="0" readonly />
+                
+                <div class="keys">
+                    <button class="h-12 text-sm sm:text-base rounded-lg border border-gray-300 hover:bg-gray-100 font-bold" data-key="7">7</button>
+                    <button class="h-12 text-sm sm:text-base rounded-lg border border-gray-300 hover:bg-gray-100 font-bold" data-key="8">8</button>
+                    <button class="h-12 text-sm sm:text-base rounded-lg border border-gray-300 hover:bg-gray-100 font-bold" data-key="9">9</button>
+                    <button class="h-12 text-sm sm:text-base rounded-lg border border-blue-500 text-blue-600 hover:bg-blue-50 font-bold" data-key="÷">÷</button>
+
+                    <button class="h-12 text-sm sm:text-base rounded-lg border border-gray-300 hover:bg-gray-100 font-bold" data-key="4">4</button>
+                    <button class="h-12 text-sm sm:text-base rounded-lg border border-gray-300 hover:bg-gray-100 font-bold" data-key="5">5</button>
+                    <button class="h-12 text-sm sm:text-base rounded-lg border border-gray-300 hover:bg-gray-100 font-bold" data-key="6">6</button>
+                    <button class="h-12 text-sm sm:text-base rounded-lg border border-blue-500 text-blue-600 hover:bg-blue-50 font-bold" data-key="×">×</button>
+
+                    <button class="h-12 text-sm sm:text-base rounded-lg border border-gray-300 hover:bg-gray-100 font-bold" data-key="1">1</button>
+                    <button class="h-12 text-sm sm:text-base rounded-lg border border-gray-300 hover:bg-gray-100 font-bold" data-key="2">2</button>
+                    <button class="h-12 text-sm sm:text-base rounded-lg border border-gray-300 hover:bg-gray-100 font-bold" data-key="3">3</button>
+                    <button class="h-12 text-sm sm:text-base rounded-lg border border-blue-500 text-blue-600 hover:bg-blue-50 font-bold" data-key="-">-</button>
+
+                    <button class="col-span-2 h-12 text-sm sm:text-base rounded-lg border border-gray-300 hover:bg-gray-100 font-bold" data-key="0">0</button>
+                    <button class="h-12 text-sm sm:text-base rounded-lg border border-red-500 bg-red-50 text-red-600 font-bold hover:bg-red-100" data-key="C">C</button>
+                    <button class="h-12 text-sm sm:text-base rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-700 shadow-md" data-key="=">=</button>
+                    <button class="h-12 text-sm sm:text-base rounded-lg border border-blue-500 text-blue-600 hover:bg-blue-50 font-bold" data-key="+">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById("display");
+        const keys = document.querySelector(".keys");
+        let first = null, op = null, waitingSecond = false;
+
+        function setDisplay(v) { display.value = String(v); }
+        function inputDigit(d) {
+            if (waitingSecond) { setDisplay(d); waitingSecond = false; return; }
+            const cur = display.value;
+            setDisplay(cur === "0" ? d : cur + d);
+        }
+        function clearAll() { first = null; op = null; waitingSecond = false; setDisplay("0"); }
+        function compute(a, operator, b) {
+            if (operator === "+") return a + b;
+            if (operator === "-") return a - b;
+            if (operator === "×") return a * b;
+            if (operator === "÷") return b === 0 ? "Error" : a / b;
+            return b;
+        }
+        function handleOperator(nextOp) {
+            const cur = Number(display.value);
+            if (first === null) first = cur;
+            else if (op && !waitingSecond) {
+                const result = compute(first, op, cur);
+                if (result === "Error") { setDisplay("Error"); clearAll(); return; }
+                first = result; setDisplay(result);
+            }
+            op = nextOp; waitingSecond = true;
+        }
+        function doEqual() {
+            if (op === null || first === null) return;
+            const cur = Number(display.value);
+            const result = compute(first, op, cur);
+            if (result === "Error") { setDisplay("Error"); clearAll(); return; }
+            setDisplay(result); first = result; waitingSecond = true;
+        }
+
+        keys.addEventListener("click", (e) => {
+            const btn = e.target.closest("button");
+            if (!btn) return;
+            const key = btn.dataset.key;
+            if (key >= "0" && key <= "9") inputDigit(key);
+            else if (key === "C") clearAll();
+            else if (key === "=") doEqual();
+            else if (key === "+" || key === "-" || key === "×" || key === "÷") handleOperator(key);
+        });
+    </script>
+</body>
+</html>
